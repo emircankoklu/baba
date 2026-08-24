@@ -63,6 +63,11 @@ export default function BirthdayPage() {
 
   // Handle celebration button click
   const startCelebration = () => {
+    // Haptic burst on supported mobile devices
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      navigator.vibrate([100, 50, 100, 50, 200]);
+    }
+
     setBalloonsTriggered(true);
     setCelebrationStarted(true);
 
@@ -81,14 +86,14 @@ export default function BirthdayPage() {
   // ─── Loading State ───────────────────────────────────────────
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f]">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f] px-4">
         <div className="relative">
-          <div className="w-20 h-20 border-4 border-zinc-700 border-t-pink-500 rounded-full animate-spin" />
-          <span className="absolute inset-0 flex items-center justify-center text-3xl">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-zinc-700 border-t-pink-500 rounded-full animate-spin" />
+          <span className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl">
             🎂
           </span>
         </div>
-        <p className="mt-6 text-zinc-400 animate-pulse">
+        <p className="mt-5 text-sm sm:text-base text-zinc-400 animate-pulse">
           Sürpriz hazırlanıyor...
         </p>
       </div>
@@ -98,27 +103,14 @@ export default function BirthdayPage() {
   // ─── Error State ─────────────────────────────────────────────
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f] px-6">
-        <div className="glass-card p-8 max-w-md text-center space-y-4">
-          <span className="text-5xl">😢</span>
-          <h2 className="text-xl font-bold text-zinc-200">Bağlantı Hatası</h2>
-          <p className="text-zinc-400 text-sm">{error}</p>
-          <div className="pt-2 space-y-2 text-left text-xs text-zinc-500">
-            <p>Kontrol edin:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>
-                Django sunucusu:{" "}
-                <code className="text-pink-400">python manage.py runserver</code>
-              </li>
-              <li>
-                CORS ayarları:{" "}
-                <code className="text-pink-400">localhost:3000</code> izinli mi?
-              </li>
-            </ul>
-          </div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f] px-4">
+        <div className="glass-card p-6 sm:p-8 max-w-md w-full text-center space-y-4">
+          <span className="text-4xl sm:text-5xl">😢</span>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-200">Bağlantı Hatası</h2>
+          <p className="text-zinc-400 text-xs sm:text-sm">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-400 hover:bg-pink-500/30 transition-colors"
+            className="mt-4 px-6 py-2.5 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-400 hover:bg-pink-500/30 text-sm transition-colors"
           >
             Tekrar Dene
           </button>
@@ -129,9 +121,9 @@ export default function BirthdayPage() {
 
   // ─── Main Content ────────────────────────────────────────────
   return (
-    <main className="relative min-h-screen bg-[#0a0a0f]">
+    <main className="relative min-h-screen bg-[#0a0a0f] overflow-x-hidden">
       {/* Background particles */}
-      <ConfettiParticles count={35} />
+      <ConfettiParticles count={25} />
 
       {/* Balloons animation (renders its own overlay) */}
       <Balloons ref={balloonsRef} trigger={balloonsTriggered} />
@@ -156,52 +148,52 @@ export default function BirthdayPage() {
       )}
 
       {/* ─── Section 3: Celebration Button ────────────────────── */}
-      <section className="relative py-20 flex flex-col items-center justify-center">
-        <div className="text-center space-y-8">
+      <section className="relative py-14 sm:py-20 px-4 flex flex-col items-center justify-center">
+        <div className="text-center space-y-6 sm:space-y-8 w-full max-w-sm mx-auto">
           {!celebrationStarted ? (
             <>
-              <p className="text-zinc-400 text-lg animate-pulse">
+              <p className="text-zinc-400 text-base sm:text-lg animate-pulse">
                 Kutlamaya hazır mısın? 🎊
               </p>
               <button
                 id="celebration-button"
                 onClick={startCelebration}
                 className="
-                  relative group
-                  px-12 py-5 rounded-full
+                  relative group w-full
+                  px-8 sm:px-12 py-4 sm:py-5 rounded-full
                   bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600
-                  text-white text-xl font-bold
+                  text-white text-lg sm:text-xl font-bold
                   shadow-[0_0_40px_rgba(236,72,153,0.4)]
                   hover:shadow-[0_0_60px_rgba(236,72,153,0.6)]
-                  hover:scale-105
                   active:scale-95
                   transition-all duration-300
                   animate-pulse-glow
                   bg-[length:200%_100%]
                   hover:bg-right
                   cursor-pointer
+                  touch-manipulation
                 "
               >
                 <span className="relative z-10">Kutlamayı Başlat! 🎈</span>
 
                 {/* Animated border ring */}
-                <span className="absolute inset-0 rounded-full border-2 border-pink-400/30 animate-ping" />
+                <span className="absolute inset-0 rounded-full border-2 border-pink-400/30 animate-ping pointer-events-none" />
               </button>
             </>
           ) : (
-            <div className="animate-fade-in-up space-y-4">
-              <span className="text-6xl block">🎉</span>
-              <p className="text-2xl font-bold text-pink-400 text-glow-sm">
+            <div className="animate-fade-in-up space-y-3 sm:space-y-4">
+              <span className="text-5xl sm:text-6xl block">🎉</span>
+              <p className="text-xl sm:text-2xl font-bold text-pink-400 text-glow-sm">
                 Kutlama başladı!
               </p>
               <button
                 onClick={startCelebration}
                 className="
-                  mt-4 px-8 py-3 rounded-full
+                  mt-3 px-7 py-2.5 sm:py-3 rounded-full
                   bg-pink-500/20 border border-pink-500/40
-                  text-pink-400 font-medium
-                  hover:bg-pink-500/30
-                  transition-all duration-300
+                  text-pink-400 font-medium text-sm sm:text-base
+                  hover:bg-pink-500/30 active:scale-95
+                  transition-all duration-200
                   cursor-pointer
                 "
               >
@@ -214,24 +206,24 @@ export default function BirthdayPage() {
 
       {/* ─── Section 4: Celebration Message ───────────────────── */}
       {config?.celebration_message && (
-        <section className="relative py-20 px-6">
+        <section className="relative py-12 sm:py-20 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto text-center">
             {/* Decorative line */}
-            <div className="flex items-center justify-center gap-4 mb-10">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-pink-500/50" />
-              <span className="text-2xl">💌</span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-pink-500/50" />
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-10">
+              <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent to-pink-500/50" />
+              <span className="text-xl sm:text-2xl">💌</span>
+              <div className="h-px w-12 sm:w-16 bg-gradient-to-l from-transparent to-pink-500/50" />
             </div>
 
-            <div className="glass-card p-8 sm:p-12">
-              <h3 className="text-2xl font-bold text-zinc-200 mb-6">
+            <div className="glass-card p-6 sm:p-12">
+              <h3 className="text-xl sm:text-2xl font-bold text-zinc-200 mb-4 sm:mb-6">
                 Sana Özel Mesajımız
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {config.celebration_message.split("\n").map((paragraph, i) => (
                   <p
                     key={i}
-                    className="text-zinc-300 text-lg leading-relaxed"
+                    className="text-zinc-300 text-base sm:text-lg leading-relaxed"
                   >
                     {paragraph}
                   </p>
@@ -243,21 +235,21 @@ export default function BirthdayPage() {
       )}
 
       {/* ─── Section 5: Memory Gallery (Card Fan Carousel) ──── */}
-      <section className="relative py-20 px-6">
+      <section className="relative py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           {/* Section header */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-purple-500/50" />
-              <span className="text-2xl">📸</span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-purple-500/50" />
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent to-purple-500/50" />
+              <span className="text-xl sm:text-2xl">📸</span>
+              <div className="h-px w-12 sm:w-16 bg-gradient-to-l from-transparent to-purple-500/50" />
             </div>
-            <h3 className="text-3xl sm:text-4xl font-bold">
+            <h3 className="text-2xl sm:text-4xl font-bold">
               <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
                 Anılarımız
               </span>
             </h3>
-            <p className="text-zinc-500 mt-3">
+            <p className="text-zinc-500 text-xs sm:text-sm mt-2 sm:mt-3">
               Birlikte yaşadığımız güzel anlar ✨
             </p>
           </div>
@@ -266,6 +258,7 @@ export default function BirthdayPage() {
           <CardFanCarousel items={carouselItems} />
         </div>
       </section>
+
 
       {/* ─── Section 6: Interactive Gift Shelf (Leave a Note) ─── */}
       <GiftShelf friendsName={config?.friends_name || "Arkadaşım"} />

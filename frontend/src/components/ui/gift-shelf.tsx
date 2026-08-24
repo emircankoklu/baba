@@ -198,22 +198,23 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
       {/* ─── Postcard / Notepad Modal ─────────────────────────── */}
       {selectedGift && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in-up"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in-up overflow-y-auto"
           onClick={closeModal}
         >
           <div
             className="
-              relative w-full max-w-lg overflow-hidden rounded-2xl
+              relative w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-2xl
               bg-[#121218] border border-amber-500/30
               shadow-[0_0_50px_rgba(217,119,6,0.25)]
-              text-zinc-100 p-6 sm:p-8
+              text-zinc-100 p-5 sm:p-8 my-auto
             "
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800 transition-colors"
+              className="absolute top-3 right-3 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800 transition-colors z-10"
+              aria-label="Kapat"
             >
               ✕
             </button>
@@ -221,22 +222,22 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
             {!isSuccess ? (
               <>
                 {/* Postcard Header */}
-                <div className="flex items-center gap-3 border-b border-zinc-800 pb-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl">
+                <div className="flex items-center gap-3 border-b border-zinc-800 pb-3 sm:pb-4 mb-4 sm:mb-6 pr-8">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
                     {selectedGift.emoji}
                   </div>
                   <div>
-                    <span className="text-xs uppercase tracking-wider text-amber-400 font-semibold">
+                    <span className="text-[10px] sm:text-xs uppercase tracking-wider text-amber-400 font-semibold block line-clamp-1">
                       {selectedGift.name} İçinden Çıkan Kartpostal
                     </span>
-                    <h4 className="text-xl font-bold text-white">
+                    <h4 className="text-lg sm:text-xl font-bold text-white">
                       {friendsName}&apos;e Not Bırak 💌
                     </h4>
                   </div>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                   {errorMsg && (
                     <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
                       {errorMsg}
@@ -245,7 +246,7 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
 
                   {/* Sender Name */}
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-400 mb-1">
                       Adın / Kimsin? <span className="text-pink-400">*</span>
                     </label>
                     <input
@@ -255,9 +256,9 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                       placeholder="Örn: Can Dostun Ali, Kardeşin..."
                       maxLength={100}
                       className="
-                        w-full px-4 py-2.5 rounded-xl
+                        w-full px-3.5 py-2.5 rounded-xl
                         bg-zinc-900/90 border border-zinc-700/80
-                        text-white placeholder-zinc-500 text-sm
+                        text-white placeholder-zinc-500 text-base sm:text-sm
                         focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400
                         transition-all
                       "
@@ -267,19 +268,19 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
 
                   {/* Message (Postcard / Notepad lined look) */}
                   <div>
-                    <label className="block text-xs font-medium text-zinc-400 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-400 mb-1">
                       Kutlama Notun / Mesajın{" "}
                       <span className="text-pink-400">*</span>
                     </label>
                     <textarea
-                      rows={4}
+                      rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Buraya doğum günü sahibine özel sevgi dolu bir mesaj yaz..."
                       className="
-                        w-full px-4 py-3 rounded-xl
+                        w-full px-3.5 py-2.5 rounded-xl
                         bg-zinc-900/90 border border-zinc-700/80
-                        text-white placeholder-zinc-500 text-sm leading-relaxed
+                        text-white placeholder-zinc-500 text-base sm:text-sm leading-relaxed
                         focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400
                         transition-all resize-none
                       "
@@ -288,9 +289,9 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   </div>
 
                   {/* Confidentiality Guarantee Note */}
-                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-purple-500/10 border border-purple-500/25 text-purple-300 text-xs">
-                    <span className="text-base flex-shrink-0">🔒</span>
-                    <p className="font-medium">
+                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/25 text-purple-300 text-xs">
+                    <span className="text-sm flex-shrink-0">🔒</span>
+                    <p className="font-medium text-[11px] sm:text-xs">
                       <strong>Not!</strong> Bu notu yalnızca{" "}
                       <span className="text-pink-400 underline font-bold">
                         &quot;{friendsName}&quot;
@@ -304,14 +305,15 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                     type="submit"
                     disabled={isSubmitting}
                     className="
-                      w-full py-3.5 px-6 rounded-xl
+                      w-full py-3 sm:py-3.5 px-6 rounded-xl
                       bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600
                       hover:from-amber-400 hover:via-pink-400 hover:to-purple-500
+                      active:scale-[0.98]
                       text-white font-bold text-sm
                       shadow-[0_0_25px_rgba(244,114,182,0.3)]
                       hover:shadow-[0_0_35px_rgba(244,114,182,0.5)]
                       disabled:opacity-50 disabled:cursor-not-allowed
-                      transition-all duration-300 cursor-pointer
+                      transition-all duration-200 cursor-pointer
                       flex items-center justify-center gap-2
                     "
                   >
@@ -330,6 +332,7 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                 </form>
               </>
             ) : (
+
               /* Success State */
               <div className="text-center py-6 space-y-4 animate-fade-in-up">
                 <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-3xl flex items-center justify-center mx-auto animate-bounce">

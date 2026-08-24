@@ -116,34 +116,34 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
           </p>
         </div>
 
-        {/* Counter Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
+        {/* Counter Grid - 3 cols on mobile, 6 cols on tablet/desktop */}
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3.5">
           {statBoxes.map((item, idx) => (
             <div
               key={idx}
               className={`
-                relative overflow-hidden p-4 sm:p-5 rounded-2xl
+                relative overflow-hidden p-3 sm:p-5 rounded-2xl
                 bg-gradient-to-b ${item.gradient}
                 border ${item.border}
                 backdrop-blur-md
                 flex flex-col items-center justify-center
-                shadow-lg hover:scale-105 transition-all duration-300
+                shadow-lg active:scale-95 transition-all duration-300
               `}
             >
               {item.isLive && (
-                <span className="absolute top-2 right-2 flex h-2 w-2">
+                <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500" />
                 </span>
               )}
 
-              <span className="text-lg sm:text-xl mb-1">{item.icon}</span>
+              <span className="text-base sm:text-xl mb-0.5 sm:mb-1">{item.icon}</span>
 
-              <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight tabular-nums font-mono">
+              <span className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight tabular-nums font-mono">
                 {String(item.value).padStart(2, "0")}
               </span>
 
-              <span className="text-xs uppercase tracking-wider text-zinc-400 mt-1 font-medium">
+              <span className="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-400 mt-0.5 sm:mt-1 font-medium">
                 {item.label}
               </span>
             </div>
@@ -151,8 +151,8 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
         </div>
 
         {/* Total days milestone badge */}
-        <div className="pt-2">
-          <p className="inline-block text-xs sm:text-sm text-zinc-400 bg-zinc-900/60 border border-zinc-800 rounded-full px-5 py-2">
+        <div className="pt-2 px-2">
+          <p className="inline-block text-xs sm:text-sm text-zinc-400 bg-zinc-900/70 border border-zinc-800 rounded-full px-4 sm:px-5 py-2 leading-relaxed">
             🌟 Toplam{" "}
             <span className="text-pink-400 font-bold font-mono">
               {diff.totalDays.toLocaleString("tr-TR")}
@@ -162,5 +162,6 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
         </div>
       </div>
     </section>
+
   );
 }

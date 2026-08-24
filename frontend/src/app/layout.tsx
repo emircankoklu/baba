@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,12 +13,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0a0a0f",
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: "🎂 Doğum Günün Kutlu Olsun!",
   description:
     "Sana özel hazırlanmış bir doğum günü sürprizi! Anılarımız ve kutlama mesajlarımız burada.",
   keywords: ["doğum günü", "sürpriz", "kutlama", "anılar"],
 };
+
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
