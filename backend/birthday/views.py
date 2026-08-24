@@ -7,6 +7,7 @@ API views for the Birthday website.
 """
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import BirthdayPageConfig, MemoryPhoto, GiftNote
@@ -24,6 +25,8 @@ class BirthdayConfigView(RetrieveAPIView):
     Creates a default one if it doesn't exist yet.
     """
     serializer_class = BirthdayPageConfigSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
     def get_object(self):
         # django-solo's .get_solo() handles get-or-create automatically
@@ -36,6 +39,8 @@ class MemoryPhotoListView(ListAPIView):
     Returns all memory photos ordered by their `order` field.
     """
     serializer_class = MemoryPhotoSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
     queryset = MemoryPhoto.objects.all()  # ordering is set in Meta
 
 
@@ -43,6 +48,10 @@ class GiftNoteCreateView(CreateAPIView):
     """
     POST /api/gift-notes/
     Allows visitors to leave a gift note on the shelf.
+    Public endpoint: No authentication or CSRF token required.
     """
     serializer_class = GiftNoteSerializer
     queryset = GiftNote.objects.all()
+    authentication_classes = []
+    permission_classes = [AllowAny]
+

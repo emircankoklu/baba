@@ -122,4 +122,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',  # Public API — no auth needed
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [],  # Disable SessionAuthentication CSRF requirement on public APIs
 }
+
