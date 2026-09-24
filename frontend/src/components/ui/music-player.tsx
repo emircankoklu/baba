@@ -80,8 +80,8 @@ export function MusicPlayer({ src }: MusicPlayerProps) {
           }
           backdrop-blur-md cursor-pointer touch-manipulation
         `}
-        title={isPlaying ? "Müziği Durdur" : "Müzik Çal"}
-        aria-label={isPlaying ? "Müziği Durdur" : "Müzik Çal"}
+        title={isPlaying ? "Musik pausieren" : "Musik abspielen"}
+        aria-label={isPlaying ? "Musik pausieren" : "Musik abspielen"}
       >
         {isLoading ? (
           <div className="w-5 h-5 border-2 border-pink-400 border-t-transparent rounded-full animate-spin" />

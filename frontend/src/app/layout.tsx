@@ -22,17 +22,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "🎂 Doğum Günün Kutlu Olsun!",
+  title: "🎂 Alles Gute zum Geburtstag!",
   description:
-    "Sana özel hazırlanmış bir doğum günü sürprizi! Anılarımız ve kutlama mesajlarımız burada.",
-  keywords: ["doğum günü", "sürpriz", "kutlama", "anılar"],
+    "Eine besondere Geburtstagsüberraschung für dich! Hier findest du unsere Erinnerungen und Glückwünsche.",
+  keywords: ["Geburtstag", "Überraschung", "Feier", "Erinnerungen"],
 };
 
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="tr"
+      lang="de"
       className={`${outfit.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

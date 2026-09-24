@@ -91,7 +91,7 @@ export function HeroSection({ friendsName, mainHeading }: HeroSectionProps) {
           style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
         >
           <span className="animate-pulse">🎂</span>
-          <span>Bugün çok özel bir gün!</span>
+          <span>Heute ist ein ganz besonderer Tag!</span>
         </div>
 
         {/* Main heading */}
@@ -112,7 +112,7 @@ export function HeroSection({ friendsName, mainHeading }: HeroSectionProps) {
           className="opacity-0 animate-fade-in-up px-2"
           style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
         >
-          <p className="text-zinc-400 text-sm sm:text-lg mb-2 sm:mb-3">Bu site sana özel hazırlandı</p>
+          <p className="text-zinc-400 text-sm sm:text-lg mb-2 sm:mb-3">Diese Seite wurde ganz für dich erstellt</p>
           <h2
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-glow break-words tracking-tight"
             style={{ color: "#ec4899" }}
@@ -127,7 +127,7 @@ export function HeroSection({ friendsName, mainHeading }: HeroSectionProps) {
           style={{ animationDelay: "1s", animationFillMode: "forwards" }}
         >
           <div className="flex flex-col items-center gap-1.5 text-zinc-500">
-            <span className="text-xs sm:text-sm">Aşağı kaydır</span>
+            <span className="text-xs sm:text-sm">Nach unten scrollen</span>
             <div className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border-2 border-zinc-600 flex items-start justify-center p-1">
               <div className="w-1.5 h-2.5 sm:h-3 bg-pink-500 rounded-full animate-bounce" />
             </div>

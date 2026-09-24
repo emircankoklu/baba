@@ -1,80 +1,37 @@
-# 🎂 PythonAnywhere Yayınlama Rehberi (https://emitshh.pythonanywhere.com)
+# 🎂 PythonAnywhere-Bereitstellungsanleitung (https://emitshh.pythonanywhere.com)
 
-Bu rehber, Doğum Günü web sitesi ve yönetim panelini **sadece PythonAnywhere** üzerinde tek bir sunucu olarak sorunsuz ve canlı çalıştırmanız için hazırlanmıştır.
-
----
-
-## 🛠️ 1. Hazırlık ve Dosyaların Yüklenmesi
-
-1. [PythonAnywhere](https://www.pythonanywhere.com/) hesabınıza giriş yapın (`emitshh`).
-2. Bilgisayarınızdaki `backend` klasörünü (içinde derlenmiş `frontend_dist`, `media`, `birthday_project` vb. bulunan klasör) bir ZIP dosyası haline getirin veya GitHub reposu oluşturup PythonAnywhere Bash konsolundan çekin.
-3. PythonAnywhere **Files** sekmesinden `/home/emitshh/` altına yükleyip açın (Örn: `/home/emitshh/baba/backend`).
+Diese Anleitung beschreibt, wie du die Geburtstagsseite und die Administration auf **PythonAnywhere** als eine laufende Anwendung veröffentlichst.
 
 ---
 
-## 🐍 2. PythonAnywhere Bash Konsolunda Virtualenv & Paket Kurulumu
+## 🛠️ 1. Vorbereitung und Dateien
 
-PythonAnywhere **Consoles** sekmesinden bir **Bash** konsolu açın ve aşağıdaki komutları sırasıyla çalıştırın:
+1. Melde dich bei [PythonAnywhere](https://www.pythonanywhere.com/) an (`emitshh`).
+2. Öffne eine Bash-Konsole und klone das Repository direkt auf PythonAnywhere.
+3. Verwende als Projektpfad `/home/emitshh/baba`.
+
+## 🐍 2. Virtuelle Umgebung und Pakete
+
+Führe die folgenden Befehle in der PythonAnywhere-Bash-Konsole aus:
 
 ```bash
-# 1. Sanal ortamı (virtualenv) oluşturun (Python 3.10 veya 3.11)
-mkvirtualenv --python=/usr/bin/python3.10 birthday-venv
-
-# 2. Backend klasörüne gidin
+cd /home/emitshh
+git clone https://github.com/emircankoklu/baba.git
 cd /home/emitshh/baba/backend
-
-# 3. Gerekli kütüphaneleri yükleyin
+mkvirtualenv --python=/usr/bin/python3.10 birthday-venv
 pip install -r requirements.txt
-
-# 4. Veritabanını oluşturun
 python manage.py migrate
-
-# 5. Yönetici (Admin) hesabı oluşturun
 python manage.py createsuperuser
-
-# 6. Django Admin CSS/JS statik dosyalarını toplayın
 python manage.py collectstatic --noinput
 ```
 
----
+## 🌐 3. Einstellungen im Web-Tab
 
-## 🌐 3. Web Sekmesi Ayarları (PythonAnywhere Dashboard -> Web)
-
-1. PythonAnywhere **Web** sekmesine gidin.
-2. **"Add a new web app"** butonuna tıklayın.
-3. **"Manual configuration"** seçeneğini seçin -> **Python 3.10** seçip bitirin.
-4. Aşağıdaki ayarları ilgili bölümlere yazın:
-
-### A) Code Bölümü
-- **Source code:** `/home/emitshh/baba/backend`
-- **Working directory:** `/home/emitshh/baba/backend`
-
-### B) WSGI configuration file
-- `/var/www/emitshh_pythonanywhere_com_wsgi.py` bağlantısına tıklayın.
-- İçindeki varsayılan kodları silip sadece aşağıdakini yapıştırın ve **Save** butonuna tıklayın:
-
-```python
-import os
-import sys
-
-# Proje dizini
-path = '/home/emitshh/baba/backend'
-if path not in sys.path:
-    sys.path.append(path)
-
-# Django ayar modülü
-os.environ['DJANGO_SETTINGS_MODULE'] = 'birthday_project.settings'
-
-# WSGI uygulamasını başlat
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
-```
-
-### C) Virtualenv Bölümü
-- **Virtualenv path:** `/home/emitshh/.virtualenvs/birthday-venv`
-
-### D) Static Files Bölümü (Çok Önemli!)
-Sayfanın altındaki **Static files** tablosuna şu 3 satırı ekleyin:
+1. Öffne den **Web**-Tab und wähle **Add a new web app**.
+2. Wähle **Manual configuration** und **Python 3.10**.
+3. Setze **Source code** und **Working directory** auf `/home/emitshh/baba/backend`.
+4. Setze die virtuelle Umgebung auf `/home/emitshh/.virtualenvs/birthday-venv`.
+5. Trage in der Tabelle **Static files** diese Pfade ein:
 
 | URL | Directory |
 |---|---|
@@ -82,21 +39,26 @@ Sayfanın altındaki **Static files** tablosuna şu 3 satırı ekleyin:
 | `/media/` | `/home/emitshh/baba/backend/media` |
 | `/_next/` | `/home/emitshh/baba/backend/frontend_dist/_next` |
 
----
+Öffne die WSGI-Datei `/var/www/emitshh_pythonanywhere_com_wsgi.py`, ersetze ihren Inhalt und speichere:
 
-## 🚀 4. Yayına Alma (Reload)
+```python
+import os
+import sys
 
-1. Web sekmesinin en üstündeki büyük yeşil **"Reload emitshh.pythonanywhere.com"** butonuna tıklayın.
-2. Tarayıcınızdan **[https://emitshh.pythonanywhere.com/](https://emitshh.pythonanywhere.com/)** adresini açın! 🎉
+path = '/home/emitshh/baba/backend'
+if path not in sys.path:
+  sys.path.append(path)
 
----
+os.environ['DJANGO_SETTINGS_MODULE'] = 'birthday_project.settings'
 
-## ⚙️ İçerikleri Yönetme ve Düzenleme
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+```
 
-- **Yönetim Paneli:** `https://emitshh.pythonanywhere.com/admin/`
-- Buradan:
-  - Arkadaşınızın adını, kutlama başlığını ve mesajını değiştirebilirsiniz.
-  - Doğum tarihini ayarlayarak canlı sayaç açabilirsiniz.
-  - Arka plan müziği (mp3) yükleyebilirsiniz.
-  - **Anı Fotoğrafları** ekleyip sıralayabilirsiniz.
-  - Ziyaretçilerin bıraktığı hediye notlarını okuyabilirsiniz.
+## 🚀 4. Neustart
+
+Klicke im Web-Tab auf **Reload emitshh.pythonanywhere.com** und öffne anschließend [https://emitshh.pythonanywhere.com/](https://emitshh.pythonanywhere.com/).
+
+## ⚙️ Inhalte verwalten
+
+Die Administration erreichst du unter `https://emitshh.pythonanywhere.com/admin/`. Dort kannst du Namen, Glückwunschtext, Geburtsdatum, Musik, Erinnerungsfotos und hinterlassene Geschenknachrichten verwalten.

@@ -108,7 +108,7 @@ export async function sendGiftNote(
     throw new Error(
       errorData.detail ||
         errorData.message ||
-        `Not gönderilemedi (${res.status})`
+        `Nachricht konnte nicht gesendet werden (${res.status})`
     );
   }
 

@@ -21,43 +21,43 @@ interface GiftBoxItem {
 const GIFTS: GiftBoxItem[] = [
   {
     id: "gold",
-    name: "Altın Sürpriz Kutu",
+    name: "Goldene Überraschungsbox",
     emoji: "🎁",
     color: "from-amber-500/20 via-yellow-500/10 to-amber-500/5",
     border: "border-amber-400/40 hover:border-amber-400",
     glow: "hover:shadow-[0_0_30px_rgba(251,191,36,0.35)]",
-    description: "Parlak altın kurdeleli hediye kutusu",
+    description: "Geschenkbox mit glänzendem goldenem Band",
   },
   {
     id: "pink",
-    name: "Pembe Sevgi Kutusu",
+    name: "Rosa Liebesbox",
     emoji: "💖",
     color: "from-pink-500/20 via-rose-500/10 to-pink-500/5",
     border: "border-pink-400/40 hover:border-pink-400",
     glow: "hover:shadow-[0_0_30px_rgba(244,114,182,0.35)]",
-    description: "Kalpli ve sevgi dolu pembe hediye paketi",
+    description: "Rosa Geschenk mit Herzen und viel Liebe",
   },
   {
     id: "purple",
-    name: "Sihirli Yıldız Kutusu",
+    name: "Magische Sternenbox",
     emoji: "✨",
     color: "from-purple-500/20 via-fuchsia-500/10 to-purple-500/5",
     border: "border-purple-400/40 hover:border-purple-400",
     glow: "hover:shadow-[0_0_30px_rgba(192,132,252,0.35)]",
-    description: "Yıldız tozuyla süslenmiş mor kutu",
+    description: "Violette Box, verziert mit Sternenstaub",
   },
   {
     id: "emerald",
-    name: "Zümrüt Mutluluk Kutusu",
+    name: "Smaragdgrüne Glücksbox",
     emoji: "🌿",
     color: "from-emerald-500/20 via-teal-500/10 to-emerald-500/5",
     border: "border-emerald-400/40 hover:border-emerald-400",
     glow: "hover:shadow-[0_0_30px_rgba(52,211,153,0.35)]",
-    description: "Huzur ve neşe getiren zümrüt yeşili kutu",
+    description: "Smaragdgrüne Box, die Ruhe und Freude bringt",
   },
 ];
 
-export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
+export function GiftShelf({ friendsName = "Mein Schatz" }: GiftShelfProps) {
   const [selectedGift, setSelectedGift] = useState<GiftBoxItem | null>(null);
   const [senderName, setSenderName] = useState("");
   const [message, setMessage] = useState("");
@@ -83,7 +83,7 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!senderName.trim() || !message.trim()) {
-      setErrorMsg("Lütfen adınızı ve mesajınızı yazın.");
+      setErrorMsg("Bitte gib deinen Namen und deine Nachricht ein.");
       return;
     }
 
@@ -104,7 +104,7 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
       setMessage("");
     } catch (err: any) {
       console.error("Failed to send note:", err);
-      setErrorMsg(err.message || "Mesaj gönderilirken bir hata oluştu.");
+      setErrorMsg(err.message || "Beim Senden der Nachricht ist ein Fehler aufgetreten.");
     } finally {
       setIsSubmitting(false);
     }
@@ -126,18 +126,18 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
         <div className="text-center mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium">
             <span>🎁</span>
-            <span>Özel Dilek & Sürpriz Rafı</span>
+            <span>Regal für besondere Wünsche & Überraschungen</span>
           </div>
 
           <h3 className="text-3xl sm:text-4xl font-extrabold text-zinc-100">
             <span className="bg-gradient-to-r from-amber-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              {friendsName}&apos;e Hediye Bırak
+              Hinterlasse {friendsName} ein Geschenk
             </span>
           </h3>
 
           <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
-            Aşağıdaki raftan dilediğin hediyeye tıkla, havai fişekleri patlat ve
-            içine {friendsName}&apos;e özel gizli bir kutlama notu iliştir! ✨
+            Klicke auf ein Geschenk im Regal, lass ein Feuerwerk steigen und
+            hinterlasse darin eine geheime Geburtstagsnachricht für {friendsName}! ✨
           </p>
         </div>
 
@@ -159,11 +159,11 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   transition-all duration-300 transform
                   hover:-translate-y-3 active:scale-95
                 `}
-                title={`${gift.name} - Tıkla ve not bırak`}
+                title={`${gift.name} - Klicken und Nachricht hinterlassen`}
               >
                 {/* Floating particle sparkle badge */}
                 <span className="absolute -top-2.5 px-2.5 py-0.5 rounded-full bg-zinc-900/90 border border-zinc-700 text-[10px] text-zinc-300 font-medium tracking-wide">
-                  Tıkla & Aç
+                  Klicken & Öffnen
                 </span>
 
                 {/* Animated Gift Emoji */}
@@ -214,7 +214,7 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800 transition-colors z-10"
-              aria-label="Kapat"
+              aria-label="Schließen"
             >
               ✕
             </button>
@@ -228,10 +228,10 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   </div>
                   <div>
                     <span className="text-[10px] sm:text-xs uppercase tracking-wider text-amber-400 font-semibold block line-clamp-1">
-                      {selectedGift.name} İçinden Çıkan Kartpostal
+                      Postkarte aus {selectedGift.name}
                     </span>
                     <h4 className="text-lg sm:text-xl font-bold text-white">
-                      {friendsName}&apos;e Not Bırak 💌
+                      Hinterlasse {friendsName} eine Nachricht 💌
                     </h4>
                   </div>
                 </div>
@@ -247,13 +247,13 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   {/* Sender Name */}
                   <div>
                     <label className="block text-xs font-medium text-zinc-400 mb-1">
-                      Adın / Kimsin? <span className="text-pink-400">*</span>
+                      Dein Name / Wer bist du? <span className="text-pink-400">*</span>
                     </label>
                     <input
                       type="text"
                       value={senderName}
                       onChange={(e) => setSenderName(e.target.value)}
-                      placeholder="Örn: Can Dostun Ali, Kardeşin..."
+                      placeholder="z. B.: Dein Freund Alex, deine Schwester ..."
                       maxLength={100}
                       className="
                         w-full px-3.5 py-2.5 rounded-xl
@@ -269,14 +269,14 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   {/* Message (Postcard / Notepad lined look) */}
                   <div>
                     <label className="block text-xs font-medium text-zinc-400 mb-1">
-                      Kutlama Notun / Mesajın{" "}
+                      Deine Geburtstagsnachricht{" "}
                       <span className="text-pink-400">*</span>
                     </label>
                     <textarea
                       rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Buraya doğum günü sahibine özel sevgi dolu bir mesaj yaz..."
+                      placeholder="Schreibe hier eine liebevolle Nachricht zum Geburtstag ..."
                       className="
                         w-full px-3.5 py-2.5 rounded-xl
                         bg-zinc-900/90 border border-zinc-700/80
@@ -292,11 +292,11 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   <div className="flex items-center gap-2 p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/25 text-purple-300 text-xs">
                     <span className="text-sm flex-shrink-0">🔒</span>
                     <p className="font-medium text-[11px] sm:text-xs">
-                      <strong>Not!</strong> Bu notu yalnızca{" "}
+                      <strong>Hinweis!</strong> Diese Nachricht kann nur{" "}
                       <span className="text-pink-400 underline font-bold">
                         &quot;{friendsName}&quot;
                       </span>{" "}
-                      okuyabilir.
+                      gelesen werden.
                     </p>
                   </div>
 
@@ -320,11 +320,11 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Hediyen İletiliyor...</span>
+                        <span>Dein Geschenk wird überreicht ...</span>
                       </>
                     ) : (
                       <>
-                        <span>Hediyeni ve Notunu Bırak!</span>
+                        <span>Geschenk und Nachricht hinterlassen!</span>
                         <span>🎁</span>
                       </>
                     )}
@@ -339,19 +339,19 @@ export function GiftShelf({ friendsName = "Arkadaşım" }: GiftShelfProps) {
                   ✨
                 </div>
                 <h4 className="text-2xl font-bold text-white">
-                  Harika! Hediyen Bırakıldı! 🎉
+                  Großartig! Dein Geschenk wurde hinterlegt! 🎉
                 </h4>
                 <p className="text-zinc-300 text-sm max-w-sm mx-auto leading-relaxed">
-                  Özel kutlama notun hediye kutusuna özenle yerleştirildi.{" "}
+                  Deine besondere Geburtstagsnachricht wurde sorgfältig in die Geschenkbox gelegt.{" "}
                   <strong className="text-pink-400">{friendsName}</strong>{" "}
-                  yönetim panelini açtığında bu tatlı sürprizini okuyacak!
+                  wird diese süße Überraschung sehen, sobald die Administration geöffnet wird!
                 </p>
                 <div className="pt-4">
                   <button
                     onClick={closeModal}
                     className="px-6 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-sm font-medium transition-colors"
                   >
-                    Kapat & Sayfaya Dön
+                    Schließen & zurück zur Seite
                   </button>
                 </div>
               </div>

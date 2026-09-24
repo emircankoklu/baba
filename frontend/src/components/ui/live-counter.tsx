@@ -17,7 +17,7 @@ interface TimeDifference {
   totalDays: number;
 }
 
-export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCounterProps) {
+export function LiveCounter({ birthDate, friendsName = "Mein Schatz" }: LiveCounterProps) {
   const [diff, setDiff] = useState<TimeDifference | null>(null);
 
   useEffect(() => {
@@ -86,12 +86,12 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
   }
 
   const statBoxes = [
-    { label: "Yıl", value: diff.years, icon: "🎂", gradient: "from-pink-500/20 to-pink-500/5", border: "border-pink-500/30" },
-    { label: "Ay", value: diff.months, icon: "🌙", gradient: "from-purple-500/20 to-purple-500/5", border: "border-purple-500/30" },
-    { label: "Gün", value: diff.days, icon: "☀️", gradient: "from-amber-500/20 to-amber-500/5", border: "border-amber-500/30" },
-    { label: "Saat", value: diff.hours, icon: "⏱️", gradient: "from-cyan-500/20 to-cyan-500/5", border: "border-cyan-500/30" },
-    { label: "Dakika", value: diff.minutes, icon: "✨", gradient: "from-emerald-500/20 to-emerald-500/5", border: "border-emerald-500/30" },
-    { label: "Saniye", value: diff.seconds, icon: "⚡", isLive: true, gradient: "from-rose-500/20 to-rose-500/5", border: "border-rose-500/40" },
+    { label: "Jahre", value: diff.years, icon: "🎂", gradient: "from-pink-500/20 to-pink-500/5", border: "border-pink-500/30" },
+    { label: "Monate", value: diff.months, icon: "🌙", gradient: "from-purple-500/20 to-purple-500/5", border: "border-purple-500/30" },
+    { label: "Tage", value: diff.days, icon: "☀️", gradient: "from-amber-500/20 to-amber-500/5", border: "border-amber-500/30" },
+    { label: "Stunden", value: diff.hours, icon: "⏱️", gradient: "from-cyan-500/20 to-cyan-500/5", border: "border-cyan-500/30" },
+    { label: "Minuten", value: diff.minutes, icon: "✨", gradient: "from-emerald-500/20 to-emerald-500/5", border: "border-emerald-500/30" },
+    { label: "Sekunden", value: diff.seconds, icon: "⚡", isLive: true, gradient: "from-rose-500/20 to-rose-500/5", border: "border-rose-500/40" },
   ];
 
   return (
@@ -100,19 +100,19 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
         {/* Header decoration */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-sm font-medium animate-pulse">
           <span>⏳</span>
-          <span>Hayatımıza Kattığın Güzellik</span>
+          <span>Die Schönheit, die du in unser Leben bringst</span>
         </div>
 
         <div>
           <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100">
-            İyi ki Doğdun,{" "}
+            Alles Gute zum Geburtstag,{" "}
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
               {friendsName}
             </span>
             !
           </h3>
           <p className="text-zinc-400 text-sm sm:text-base mt-2">
-            Bu dünyayı güzelleştirdiğin, varlığınla neşe kattığın her an için:
+            Für jeden Moment, in dem du diese Welt schöner und unser Leben fröhlicher machst:
           </p>
         </div>
 
@@ -153,11 +153,11 @@ export function LiveCounter({ birthDate, friendsName = "Arkadaşım" }: LiveCoun
         {/* Total days milestone badge */}
         <div className="pt-2 px-2">
           <p className="inline-block text-xs sm:text-sm text-zinc-400 bg-zinc-900/70 border border-zinc-800 rounded-full px-4 sm:px-5 py-2 leading-relaxed">
-            🌟 Toplam{" "}
+            🌟 Insgesamt bist du seit{" "}
             <span className="text-pink-400 font-bold font-mono">
-              {diff.totalDays.toLocaleString("tr-TR")}
+              {diff.totalDays.toLocaleString("de-DE")}
             </span>{" "}
-            gündür hayatımızdasın ve her günümüz seninle daha anlamlı!
+            Tagen Teil unseres Lebens und machst jeden Tag bedeutungsvoller!
           </p>
         </div>
       </div>

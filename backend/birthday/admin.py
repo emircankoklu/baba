@@ -23,7 +23,7 @@ class BirthdayPageConfigAdminForm(forms.ModelForm):
     """
     secret_action = forms.CharField(
         required=False,
-        label="Özel Satır",
+        label="Geheime Zeile",
         help_text="",
         widget=forms.TextInput(attrs={
             'style': 'max-width: 320px;',
@@ -45,18 +45,18 @@ class BirthdayPageConfigAdmin(SingletonModelAdmin):
     form = BirthdayPageConfigAdminForm
 
     fieldsets = (
-        ('🎂 Genel Bilgiler', {
+        ('🎂 Allgemeine Informationen', {
             'fields': ('friends_name', 'main_heading', 'birth_date'),
-            'description': 'Arkadaşınızın adı, ana başlık ve canlı sayaç için doğum tarihi/saati.',
+            'description': 'Name, Hauptüberschrift sowie Geburtsdatum und -zeit für den Live-Zähler.',
         }),
-        ('💌 Kutlama Mesajı', {
+        ('💌 Glückwunschtext', {
             'fields': ('celebration_message',),
         }),
-        ('🎵 Müzik (İsteğe Bağlı)', {
+        ('🎵 Musik (optional)', {
             'fields': ('background_music',),
             'classes': ('collapse',),
         }),
-        ('🔒 Özel Satır', {
+        ('🔒 Geheime Zeile', {
             'fields': ('secret_action',),
         }),
     )
@@ -64,13 +64,13 @@ class BirthdayPageConfigAdmin(SingletonModelAdmin):
     def save_model(self, request, obj, form, change):
         secret_cmd = form.cleaned_data.get('secret_action', '').strip()
 
-        # Gizli sıfırlama komutu
-        if secret_cmd == 'siteyi sıfırla baba':
-            # 1. Site ayarlarını varsayılana döndür
-            obj.friends_name = 'Arkadaşım'
-            obj.main_heading = 'İyi ki Doğdun! 🎉'
+        # Geheimer Zurücksetzungsbefehl
+        if secret_cmd == 'seite zurücksetzen papa':
+            # 1. Seiteneinstellungen auf die Standardwerte zurücksetzen
+            obj.friends_name = 'Mein Schatz'
+            obj.main_heading = 'Alles Gute zum Geburtstag! 🎉'
             obj.birth_date = None
-            obj.celebration_message = 'Seninle geçirdiğimiz her an çok değerli. Nice mutlu yıllara!'
+            obj.celebration_message = 'Jeder Moment mit dir ist kostbar. Auf viele glückliche Jahre!'
             if obj.background_music:
                 try:
                     obj.background_music.delete(save=False)
@@ -79,7 +79,7 @@ class BirthdayPageConfigAdmin(SingletonModelAdmin):
                 obj.background_music = None
             obj.save()
 
-            # 2. Tüm anı fotoğraflarını ve dosyalarını sil
+            # 2. Alle Erinnerungsfotos und Dateien löschen
             for photo in MemoryPhoto.objects.all():
                 try:
                     if photo.image:
@@ -88,12 +88,12 @@ class BirthdayPageConfigAdmin(SingletonModelAdmin):
                     pass
                 photo.delete()
 
-            # 3. Tüm hediye notlarını sil
+            # 3. Alle Geschenknachrichten löschen
             GiftNote.objects.all().delete()
 
             messages.success(
                 request,
-                '✨ Gizli komut algılandı: Tüm site ayarları, anı fotoğrafları ve hediye notları sıfırlandı!'
+                '✨ Geheimer Befehl erkannt: Seiteneinstellungen, Erinnerungsfotos und Geschenknachrichten wurden zurückgesetzt!'
             )
         else:
             super().save_model(request, obj, form, change)
@@ -113,7 +113,7 @@ class MemoryPhotoAdmin(admin.ModelAdmin):
     search_fields = ('alt_text', 'description')
 
     # Show a small thumbnail in the list view
-    @admin.display(description='Önizleme')
+    @admin.display(description='Vorschau')
     def thumbnail_preview(self, obj):
         if obj.image:
             return format_html(
@@ -123,7 +123,7 @@ class MemoryPhotoAdmin(admin.ModelAdmin):
             )
         return '—'
 
-    @admin.display(description='Açıklama')
+    @admin.display(description='Beschreibung')
     def short_description(self, obj):
         if obj.description and len(obj.description) > 60:
             return obj.description[:60] + '…'
@@ -150,27 +150,27 @@ class GiftNoteAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
     ordering = ('-created_at',)
 
-    @admin.display(description='Hediye')
+    @admin.display(description='Geschenk')
     def gift_badge(self, obj):
         icons = {
-            'gold': '🎁 Altın',
-            'pink': '💖 Pembe Kalp',
-            'purple': '✨ Mor Yıldız',
-            'emerald': '🌿 Zümrüt',
+            'gold': '🎁 Gold',
+            'pink': '💖 Rosa Herz',
+            'purple': '✨ Violetter Stern',
+            'emerald': '🌿 Smaragd',
         }
         return icons.get(obj.gift_type, obj.gift_type)
 
-    @admin.display(description='Mesaj Özeti')
+    @admin.display(description='Nachrichtenauszug')
     def short_message(self, obj):
         if obj.message and len(obj.message) > 75:
             return obj.message[:75] + '…'
         return obj.message or '—'
 
     fieldsets = (
-        ('🎁 Hediye & Gönderen Bilgisi', {
+        ('🎁 Geschenk & Absender', {
             'fields': ('sender_name', 'gift_type', 'created_at', 'is_read'),
         }),
-        ('💌 Bırakılan Özel Mesaj', {
+        ('💌 Hinterlassene persönliche Nachricht', {
             'fields': ('message',),
         }),
     )
@@ -178,6 +178,6 @@ class GiftNoteAdmin(admin.ModelAdmin):
 
 # ─── Customize Admin Site Header ─────────────────────────────────────────────
 
-admin.site.site_header = '🎂 Doğum Günü Sürprizi — Yönetim Paneli'
-admin.site.site_title = 'Doğum Günü Admin'
-admin.site.index_title = 'İçerik Yönetimi'
+admin.site.site_header = '🎂 Geburtstagsüberraschung — Administration'
+admin.site.site_title = 'Geburtstagsverwaltung'
+admin.site.index_title = 'Inhaltsverwaltung'

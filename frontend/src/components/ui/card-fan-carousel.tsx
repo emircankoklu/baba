@@ -214,8 +214,8 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
   if (items.length === 0) {
     return (
       <div className="text-center py-16 text-zinc-500">
-        <p className="text-base sm:text-lg">Henüz anı fotoğrafı eklenmemiş.</p>
-        <p className="text-xs sm:text-sm mt-1.5">Django Admin panelinden fotoğraf ekleyin.</p>
+        <p className="text-base sm:text-lg">Noch keine Erinnerungsfotos hinzugefügt.</p>
+        <p className="text-xs sm:text-sm mt-1.5">Füge Fotos über die Django-Administration hinzu.</p>
       </div>
     );
   }
@@ -259,7 +259,7 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
               {/* Photo */}
               <img
                 src={item.image}
-                alt={item.alt_text || "Anı fotoğrafı"}
+                alt={item.alt_text || "Erinnerungsfoto"}
                 className="w-full h-full object-cover pointer-events-none"
                 draggable={false}
                 loading="lazy"
@@ -304,8 +304,8 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
         <button
           onClick={() => navigateCard("prev")}
           className="p-2.5 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-white hover:border-pink-500/50 active:scale-95 transition-all text-sm"
-          title="Önceki Fotoğraf"
-          aria-label="Önceki Fotoğraf"
+          title="Vorheriges Foto"
+          aria-label="Vorheriges Foto"
         >
           ‹
         </button>
@@ -324,8 +324,8 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
                     : "w-2 bg-zinc-700 hover:bg-zinc-500"
                 }
               `}
-              title={`Fotoğraf ${i + 1}`}
-              aria-label={`Fotoğraf ${i + 1}`}
+              title={`Foto ${i + 1}`}
+              aria-label={`Foto ${i + 1}`}
             />
           ))}
         </div>
@@ -333,8 +333,8 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
         <button
           onClick={() => navigateCard("next")}
           className="p-2.5 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-white hover:border-pink-500/50 active:scale-95 transition-all text-sm"
-          title="Sonraki Fotoğraf"
-          aria-label="Sonraki Fotoğraf"
+          title="Nächstes Foto"
+          aria-label="Nächstes Foto"
         >
           ›
         </button>
@@ -342,7 +342,7 @@ export function CardFanCarousel({ items }: CardFanCarouselProps) {
 
       {/* Mobile-friendly Instruction text */}
       <p className="text-center text-zinc-500 text-xs sm:text-sm mt-3 animate-pulse">
-        {isMobile ? "👈 Sağa-sola kaydırarak veya dokunarak anıları keşfet ✨" : "Kartlara tıklayarak anıları keşfedin ✨"}
+        {isMobile ? "👈 Entdecke Erinnerungen durch Wischen oder Tippen ✨" : "Klicke auf die Karten, um Erinnerungen zu entdecken ✨"}
       </p>
     </div>
   );

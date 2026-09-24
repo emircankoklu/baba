@@ -51,7 +51,7 @@ export default function BirthdayPage() {
       } catch (err) {
         console.error("Failed to load data:", err);
         setError(
-          "Veriler yüklenirken bir hata oluştu. Django sunucusunun çalıştığından emin olun."
+          "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte stelle sicher, dass der Django-Server läuft."
         );
       } finally {
         setIsLoading(false);
@@ -94,7 +94,7 @@ export default function BirthdayPage() {
           </span>
         </div>
         <p className="mt-5 text-sm sm:text-base text-zinc-400 animate-pulse">
-          Sürpriz hazırlanıyor...
+          Die Überraschung wird vorbereitet ...
         </p>
       </div>
     );
@@ -106,13 +106,13 @@ export default function BirthdayPage() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f] px-4">
         <div className="glass-card p-6 sm:p-8 max-w-md w-full text-center space-y-4">
           <span className="text-4xl sm:text-5xl">😢</span>
-          <h2 className="text-lg sm:text-xl font-bold text-zinc-200">Bağlantı Hatası</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-200">Verbindungsfehler</h2>
           <p className="text-zinc-400 text-xs sm:text-sm">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="mt-4 px-6 py-2.5 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-400 hover:bg-pink-500/30 text-sm transition-colors"
           >
-            Tekrar Dene
+            Erneut versuchen
           </button>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function BirthdayPage() {
 
       {/* ─── Section 1: Hero ─────────────────────────────────── */}
       <HeroSection
-        friendsName={config?.friends_name || "Arkadaşım"}
+        friendsName={config?.friends_name || "Mein Schatz"}
         mainHeading={config?.main_heading || "İyi ki Doğdun! 🎉"}
       />
 
@@ -153,7 +153,7 @@ export default function BirthdayPage() {
           {!celebrationStarted ? (
             <>
               <p className="text-zinc-400 text-base sm:text-lg animate-pulse">
-                Kutlamaya hazır mısın? 🎊
+                Bist du bereit zu feiern? 🎊
               </p>
               <button
                 id="celebration-button"
@@ -174,7 +174,7 @@ export default function BirthdayPage() {
                   touch-manipulation
                 "
               >
-                <span className="relative z-10">Kutlamayı Başlat! 🎈</span>
+                <span className="relative z-10">Feier starten! 🎈</span>
 
                 {/* Animated border ring */}
                 <span className="absolute inset-0 rounded-full border-2 border-pink-400/30 animate-ping pointer-events-none" />
@@ -184,7 +184,7 @@ export default function BirthdayPage() {
             <div className="animate-fade-in-up space-y-3 sm:space-y-4">
               <span className="text-5xl sm:text-6xl block">🎉</span>
               <p className="text-xl sm:text-2xl font-bold text-pink-400 text-glow-sm">
-                Kutlama başladı!
+                Die Feier hat begonnen!
               </p>
               <button
                 onClick={startCelebration}
@@ -197,7 +197,7 @@ export default function BirthdayPage() {
                   cursor-pointer
                 "
               >
-                Tekrar Balonlar! 🎈
+                Noch einmal Ballons! 🎈
               </button>
             </div>
           )}
@@ -217,7 +217,7 @@ export default function BirthdayPage() {
 
             <div className="glass-card p-6 sm:p-12">
               <h3 className="text-xl sm:text-2xl font-bold text-zinc-200 mb-4 sm:mb-6">
-                Sana Özel Mesajımız
+                Unsere Nachricht für dich
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 {config.celebration_message.split("\n").map((paragraph, i) => (
@@ -246,11 +246,11 @@ export default function BirthdayPage() {
             </div>
             <h3 className="text-2xl sm:text-4xl font-bold">
               <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                Anılarımız
+                Unsere Erinnerungen
               </span>
             </h3>
             <p className="text-zinc-500 text-xs sm:text-sm mt-2 sm:mt-3">
-              Birlikte yaşadığımız güzel anlar ✨
+              Wunderschöne gemeinsame Momente ✨
             </p>
           </div>
 
@@ -261,14 +261,14 @@ export default function BirthdayPage() {
 
 
       {/* ─── Section 6: Interactive Gift Shelf (Leave a Note) ─── */}
-      <GiftShelf friendsName={config?.friends_name || "Arkadaşım"} />
+      <GiftShelf friendsName={config?.friends_name || "Mein Schatz"} />
 
       {/* Floating Admin Button */}
       <a
         href="/admin/"
         target="_blank"
         rel="noopener noreferrer"
-        title="Yönetim Paneli"
+        title="Administrationsbereich"
         className="fixed top-4 right-4 z-50 p-2.5 rounded-full bg-zinc-900/80 border border-zinc-700/60 text-zinc-400 hover:text-pink-400 hover:border-pink-500/50 hover:bg-zinc-800 transition-all duration-200 backdrop-blur-md shadow-lg"
       >
         <svg
@@ -295,7 +295,7 @@ export default function BirthdayPage() {
       {/* ─── Footer ───────────────────────────────────────────── */}
       <footer className="relative py-12 text-center border-t border-zinc-800 space-y-3">
         <p className="text-zinc-600 text-sm">
-          ❤️ Sevgiyle hazırlandı — {new Date().getFullYear()}
+          ❤️ Mit Liebe erstellt — {new Date().getFullYear()}
         </p>
         <div>
           <a
@@ -305,7 +305,7 @@ export default function BirthdayPage() {
             className="text-xs text-zinc-500 hover:text-pink-400 transition-colors inline-flex items-center gap-1.5"
           >
             <span>⚙️</span>
-            <span>İçerikleri Düzenle (Admin Paneli)</span>
+            <span>Inhalte bearbeiten (Administration)</span>
           </a>
         </div>
       </footer>
