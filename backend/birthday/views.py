@@ -41,7 +41,13 @@ class MemoryPhotoListView(ListAPIView):
     serializer_class = MemoryPhotoSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
-    queryset = MemoryPhoto.objects.all()  # ordering is set in Meta
+    def get_queryset(self):
+        # Do not expose database records whose uploaded file was deleted.
+        return [
+            photo
+            for photo in MemoryPhoto.objects.all()
+            if photo.image and photo.image.storage.exists(photo.image.name)
+        ]
 
 
 class GiftNoteCreateView(CreateAPIView):
