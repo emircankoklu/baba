@@ -37,7 +37,7 @@ class BirthdayPageConfig(SingletonModel):
         help_text='Geburtsdatum und -zeit für den Live-Zähler (optional).',
     )
     celebration_message = models.TextField(
-        default='Jeder Moment mit dir ist kostbar. Auf viele glückliche Jahre!',
+        default='Du hast meinem kleinen Spiel so viel Freude und Leben geschenkt. Mit deiner Begeisterung, deinen Nachrichten und deiner neugierigen Art machst du jeden Moment für mich besonderer. Es bedeutet mir sehr viel, dass du dich auf diese Überraschung einlässt und dich über die kleinen Dinge so ehrlich freust. Du bist ein ganz besonderer Mensch, und ich bin froh, dass es dich gibt. Ich hoffe, dein Geburtstag schenkt dir mindestens so viel Freude, wie du mir mit deiner Art schenkst. Alles Gute zum Geburtstag!',
         verbose_name='Glückwunschtext',
         help_text='Haupttext der Feier; du kannst mehrere Absätze schreiben.',
     )
